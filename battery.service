@@ -1,0 +1,17 @@
+[Unit]
+Description=The purpose of the script is to save the electricity and second to save the battery life.
+After=dbus.service
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/scripts/
+ExecStart=/bin/sh -c 'eval `dbus-launch --sh-syntax --exit-with-session` && /opt/scripts/battery-status.sh'
+Restart=always
+RestartSec=10s
+TimeoutSec=30s
+Environment="DISPLAY=:0"
+
+[Install]
+WantedBy=multi-user.target
